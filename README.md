@@ -1,5 +1,5 @@
 # dslog2csv
-Convert FRC DSLog files to CSV file
+Convert FRC DSLog files to Influx Line Protocol
 
 # Reference Sources:
   https://www.chiefdelphi.com/forums/showthread.php?p=1556451
