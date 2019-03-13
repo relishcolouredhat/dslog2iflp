@@ -197,7 +197,10 @@ if __name__ == '__main__':
             for i in range(16):
                 rec['pdp_{}'.format(i)] = rec['pdp_currents'][i]
 
-            outcsv.writerow(rec)
+            #for k,v in rec:
+            #    print("K:"+k+" V:"+v)
+            print(rec)
+            #outcsv.writerow(rec)
 
     if args.output:
         outstrm.close()
