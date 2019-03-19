@@ -6,8 +6,6 @@ import datetime
 
 def process_all_events(dir):
     import os 
-    #dir_path = os.path.dirname(os.path.realpath(dir))
-    
     out = {}
     
     for file in os.listdir(dir):
@@ -17,7 +15,6 @@ def process_all_events(dir):
             val = event_header(file)
             if val != None:
                 out[file] = val 
-    #print(out)
     return out
     
 def process_all_files(dir):
@@ -55,12 +52,8 @@ def event_header(event_file):
             
 def process_file(input_file):
     print("processing "+input_file)
-    
-    #file_name = '2019_03_01 14_29_08 Fri'
     file_name = input_file.split('.')[0]
-
     output_file = str(file_name+'.lineproto')
-    #dslog_file = str(file_name+'.dslog')
     event_file = str(file_name+'.dsevents')
     dslog_file = input_file
     
@@ -70,8 +63,8 @@ def process_file(input_file):
         event = "null"
         fms_time = "null"
        
-    #af = open(str(output_file),'w')
-    af = open("metrics.lineproto",'a')
+    #af = open(str(output_file),'w')    #one file per log
+    af = open("metrics.lineproto",'a')  #one big file
 
     
     dsparser = DSLogParser(dslog_file)
@@ -111,9 +104,6 @@ def process_file(input_file):
          rec['time_of_day'] = str(start_time)
          for i in range(16):
              rec['pdp_{}'.format(i)] = rec['pdp_currents'][i]
-         #print(str(rec)+'\r\n\r\n')
-         #print(rec.keys())
-         #print(rec.values())
 
          td = datetime.timedelta(0,0,0,rec['time'])
          t = start_time+td
@@ -166,7 +156,5 @@ def process_file(input_file):
          ',pdp_15='+str(rec['pdp_15'])+
          ' '+t+'\n'
          )
-         #print(line)
          af.write(line)
     af.close()
-         #break
