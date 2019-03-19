@@ -1,8 +1,9 @@
 from dslog2csv import *
+from influxdb import InfluxDBClient
 
 import datetime
 
-
+client = InfluxDBClient(host='localhost', port=8086)
 
 def process_all_events(dir):
     import os 
@@ -156,5 +157,6 @@ def process_file(input_file):
          ',pdp_15='+str(rec['pdp_15'])+
          ' '+t+'\n'
          )
-         af.write(line)
-    af.close()
+         line(outline,protocol='line')
+         #af.write(line)
+    #af.close()
